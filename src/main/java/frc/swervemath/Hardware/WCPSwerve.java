@@ -19,10 +19,10 @@ public class WCPSwerve implements WheelHardware {
 
     public WCPSwerve(int angleID, int speedID, int encoderID, int id){
         this.id = id;
-        angle = new TalonFX(angleID);
-        speed = new TalonFX(speedID);
+        angle = new TalonFX(angleID, "Default Name");
+        speed = new TalonFX(speedID, "Default Name");
 
-        encoder = new CANCoder(encoderID);
+        encoder = new CANCoder(encoderID, "Default Name");
         offset = (float)encoder.getAbsolutePosition();
 
         setpoint = 0;

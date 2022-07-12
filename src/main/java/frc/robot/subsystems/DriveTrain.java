@@ -8,6 +8,7 @@ import java.lang.invoke.ConstantBootstraps;
 
 import com.ctre.phoenix.sensors.PigeonIMUConfiguration;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,7 +18,10 @@ import frc.swervemath.math.*;
 
 
 public class DriveTrain extends SubsystemBase {
-  private final PS4Controller controller = new PS4Controller(0);
+  //private final PS4Controller controller = new PS4Controller(0);
+  private final Joystick leftJoystick = new Joystick(3);
+  private final Joystick rightJoystick = new Joystick(1);
+
   private final frc.swervemath.DriveTrain DriveTrain;
 
   public DriveTrain() {
@@ -32,7 +36,8 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    DriveTrain.fieldOrientedDrive(new Vector2(-(float)controller.getRawAxis(0), -(float)controller.getRawAxis(1)), (float)controller.getRawAxis(2));
+    //DriveTrain.fieldOrientedDrive(new Vector2(-(float)controller.getRawAxis(0), -(float)controller.getRawAxis(1)), (float)controller.getRawAxis(2));
+    DriveTrain.fieldOrientedDrive(new Vector2((float)leftJoystick.getRawAxis(0), -(float)leftJoystick.getRawAxis(1)), (float)rightJoystick.getRawAxis(0));
   }
   @Override
   public void simulationPeriodic() {

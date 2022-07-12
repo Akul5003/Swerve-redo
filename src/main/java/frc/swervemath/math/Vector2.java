@@ -6,6 +6,9 @@ public class Vector2 {
         this.x = x; 
         this.y = y; 
     }
+    public static Vector2 zero(){
+        return new Vector2(0f, 0f);
+    }
     public float magnitude() { 
         return (float)Math.sqrt(x*x + y*y); 
     }

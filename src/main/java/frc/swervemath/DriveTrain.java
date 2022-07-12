@@ -16,14 +16,27 @@ public class DriveTrain {
     }
 
     public void robotOrientedDrive(Vector2 Heading, float rot){
+        //adds deadzones to input
+        if(Heading.magnitude() > -0.1f && Heading.magnitude() < 0.1f)
+            Heading = Vector2.zero();
+        if(rot < 0.1f && rot > -0.1f)
+            rot = 0;
+
         if(rot == 0){
             //Without rotation, there isn't a point to be tangent to, just a direction to move
             float speed = Heading.magnitude();
 
             //maxes the speed out at 100%
             speed = speed > 1 ? 1 : speed;
-            for(int i = 0; i < wheels.length; i++){
-                wheels[i].setAngleAndSpeed((float)Math.atan2(Heading.x, -Heading.y), speed);
+            if(Heading.magnitude() != 0){
+                for(int i = 0; i < wheels.length; i++){
+                    wheels[i].setAngleAndSpeed((float)Math.atan2(Heading.x, -Heading.y), speed);
+                }
+            } else {
+                //if the Heading vector is zero, then Math.atan2 will raise an exception
+                for(int i = 0; i < wheels.length; i++){
+                    wheels[i].setAngleAndSpeed(0.0f, 0.0f);
+                }
             }
         } else {
             //balances rotation with strafing and makes the point on a line perpendicular to the heading to control the direction of movement

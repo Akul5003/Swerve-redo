@@ -9,7 +9,7 @@ public class PigeonInterface implements Gyro {
     private float calibrationAngle;
 
     public PigeonInterface(int pigID){
-        pigeon = new Pigeon2(pigID);
+        pigeon = new Pigeon2(pigID, "Default Name");
     }
     public void zero(){
         calibrationAngle = -(float)pigeon.getYaw();
